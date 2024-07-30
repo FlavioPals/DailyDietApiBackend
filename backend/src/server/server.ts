@@ -2,8 +2,12 @@ import fastify from "fastify";
 import { knex } from "../Database/setupKnex";
 import { randomUUID } from "crypto";
 import { env } from "../env";
+import { usersRoutes } from "../Database/routes/userRoutes";
 
 const app = fastify();
+app.register(usersRoutes, {
+  prefix: '/users'
+})
 
 app.listen({
   port: env.PORT,
@@ -11,13 +15,3 @@ app.listen({
   console.log('HTTP server running on http://localhost:3333')
 })
 
-app.get('/', async (req, res) => {
-  const test = await knex('users').insert({
-    id: randomUUID(),
-    name: 'Flavio'
-  })
-  const showtest  = await knex('users')
-  .where('name', 'Flavio')
-  .select('*')
-  return (console.log(showtest) , test)
-});
