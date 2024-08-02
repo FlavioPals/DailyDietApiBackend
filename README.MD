@@ -1,8 +1,8 @@
 
 ## REGRAS DA APLICAÇÃO
-[] - Deve ser possivel criar um usuário
-[] - Deve ser possivel identificar o usuario entre as requisições
-[] - Deve ser possivel regostar uma refeição feita, com as seguintes informações
+[X] - Deve ser possivel criar um usuário
+[X] - Deve ser possivel identificar o usuario entre as requisições
+[] - Deve ser possivel registar uma refeição feita, com as seguintes informações
 *Refeições devem ser relacionadas a um usuário
 *Nome
 *Descrição

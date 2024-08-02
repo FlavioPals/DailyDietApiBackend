@@ -14,13 +14,7 @@ app.listen(env.PORT, () =>{
 })
 
 
-app.post('/', async(req, res)=> {
-    const test = await knex('users').insert({
-        id:randomUUID(),
-        name:'testaaa',
-        email:'test@email.com',
-        password:'1234',
-
-    }).returning('*')
+app.get('/', async(req, res)=> {
+    const test = await knex('meals').select('*')
     res.json(test)
 })

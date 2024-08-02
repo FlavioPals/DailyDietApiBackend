@@ -1,48 +1,23 @@
-import { randomUUID } from "crypto";
-import { Router } from "express";
 
+import { Router } from "express";
 import {knex} from '../Database/setupKnex'
 import { z } from "zod";
-
+import { CreateUserUseCase } from "./UseCases/UsersUseCases/CreateUserUseCase";
+import { GetAllUsersUseCase } from "./UseCases/UsersUseCases/GetAllUsersUseCase";
+import { GetSpecificUserUseCase } from "./UseCases/UsersUseCases/GetSpecificUserUseCase";
 
 const userRoutes = Router();
+const createUserController = new CreateUserUseCase()
+const getAllUsersController = new GetAllUsersUseCase()
+const getspecificUserController = new GetSpecificUserUseCase()
 
 
 
-userRoutes.get('/',async (req, res) => {
-  const users =  await knex('users').select('*')
+userRoutes.get('/', getAllUsersController.handle)
 
-  res.json(users)
-})
+userRoutes.post('/', createUserController.handle)
 
-userRoutes.post('/',async (req, res)=> {
-    const createUserBodySchema = z.object({
-        name: z.string(),
-        email: z.string(),
-        password: z.string(),
-    })
-
-    console.log(req.body)
-  
-    const {name, email, password} =  createUserBodySchema.parse(req.body)
-    
-    const newUser = await knex('users').insert({
-    id:randomUUID(),
-    name,
-    email,
-    password,
-  })
-   res.status(201).json(newUser)
-})
-
-userRoutes.get('/:id',async (req, res) => {
-  const getTransactionParamsSchema = z.object({
-    id: z.string().uuid(),
-  })
-  const {id} =  getTransactionParamsSchema.parse(req.params)
-  const user =  await knex('users').where({id}).first()
-  res.json(user)
-})
+userRoutes.get('/:id', getspecificUserController.handle)
 
 
 
