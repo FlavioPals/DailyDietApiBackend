@@ -1,6 +1,6 @@
 import { randomUUID } from "crypto";
 import { Router } from "express";
-import { Express } from "express";
+
 import {knex} from '../Database/setupKnex'
 import { z } from "zod";
 
@@ -15,7 +15,7 @@ userRoutes.get('/',async (req, res) => {
   res.json(users)
 })
 
-userRoutes.post('/createUser',async (req, res)=> {
+userRoutes.post('/',async (req, res)=> {
     const createUserBodySchema = z.object({
         name: z.string(),
         email: z.string(),
@@ -26,16 +26,24 @@ userRoutes.post('/createUser',async (req, res)=> {
   
     const {name, email, password} =  createUserBodySchema.parse(req.body)
     
-  const newUser =await knex('users').insert({
+    const newUser = await knex('users').insert({
     id:randomUUID(),
     name,
     email,
     password,
   })
    res.status(201).json(newUser)
-
-
-
 })
+
+userRoutes.get('/:id',async (req, res) => {
+  const getTransactionParamsSchema = z.object({
+    id: z.string().uuid(),
+  })
+  const {id} =  getTransactionParamsSchema.parse(req.params)
+  const user =  await knex('users').where({id}).first()
+  res.json(user)
+})
+
+
 
 export { userRoutes }
