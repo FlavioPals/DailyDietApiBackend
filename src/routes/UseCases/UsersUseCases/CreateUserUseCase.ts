@@ -19,7 +19,9 @@ class CreateUserUseCase{
                 id: randomUUID(),
                 name,
                 email,
-                password
+                password,
+                created_at: knex.fn.now(),
+                updated_at: knex.fn.now()
             })
             return response.json(newUser)
         } catch (error) {

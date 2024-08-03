@@ -1,6 +1,5 @@
 import express from 'express'
 import { knex } from './Database/setupKnex'
-import { randomUUID } from 'crypto'
 import { env } from './env'
 import { userRoutes } from './routes/userRoutes'
 
