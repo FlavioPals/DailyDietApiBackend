@@ -1,7 +1,5 @@
 
 import { Router } from "express";
-import {knex} from '../Database/setupKnex'
-import { z } from "zod";
 import { CreateUserUseCase } from "./UseCases/UsersUseCases/CreateUserUseCase";
 import { GetAllUsersUseCase } from "./UseCases/UsersUseCases/GetAllUsersUseCase";
 import { GetSpecificUserUseCase } from "./UseCases/UsersUseCases/GetSpecificUserUseCase";
