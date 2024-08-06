@@ -7,8 +7,9 @@ class GetSpecificUserUseCase {
         const { id } = getSpecificUserBodySchema.parse(request.params)
         try {
             const user = await knex('users').where({ id }).first()
-            return response.json(user)
-
+            const mealsOfUser = await knex('meals').where({ user_id: id })
+            const userWithMeals = { ...user, meals: mealsOfUser }
+            return response.json(userWithMeals)
         }
         catch (error) {
             throw error

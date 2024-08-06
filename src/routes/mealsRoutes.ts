@@ -12,11 +12,13 @@ const getSpecificMealController = new GetSpecificMealUseCase()
 const editMealController = new EditMealUseCase()
 const deleteMealController = new DeleteMealUseCase()
 
-mealsRoutes.post('/', createMealController.handle)
+mealsRoutes.post('/:id', createMealController.handle)
 mealsRoutes.get('/', getAllMealsController.handle)
 mealsRoutes.get('/:id', getSpecificMealController.handle)
 mealsRoutes.patch('/:id', editMealController.handle)
 mealsRoutes.delete('/:id', deleteMealController.handle)
+
+
 
 
 

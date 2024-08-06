@@ -6,7 +6,7 @@ export class DeleteMealUseCase{
         const {id} = request.params
         try{
             await knex('meals').where('id', id).del()
-            return response.json({message:'User deleted'})
+            return response.json({message:'Meal deleted'})
         }
         catch(error){
             throw error

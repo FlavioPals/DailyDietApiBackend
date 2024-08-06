@@ -8,12 +8,14 @@ class CreateMealUseCase{
     async handle(request:Request, response:Response){
 
         const {name, description, isDiet} = createMealBodySchema.parse(request.body)
+        const {id} = request.params
         try{
             await knex('meals').insert({
                 id: randomUUID(),
                 name,
                 description,
-                isDiet
+                isDiet,
+                user_id:id
             })
             response.json({message:'Meal created'})
         }
