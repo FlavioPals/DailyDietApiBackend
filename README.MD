@@ -1,5 +1,7 @@
+## App
 
-## REGRAS DA APLICAÇÃO
+
+## RFs(Requisitos funcionais)
 [ ] - Deve ser possivel criar um usuário
 [ ] - Deve ser possivel identificar o usuario entre as requisições
 [ ] - Deve ser possivel registar uma refeição feita, com as seguintes informações
